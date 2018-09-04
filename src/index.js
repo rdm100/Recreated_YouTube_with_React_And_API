@@ -15,21 +15,30 @@ class App extends Component {
 
 		this.state =  {
 			videos: [],
-			selectedVideo: null
+			selectedVideo: null,
 		};
+		this.videoSearch('surfboards')
+	}
 
-
-		YouTube ({key: API_KEY, term: 'surfboards'}, (videos) => {
+	videoSearch(term){
+		YouTube ({key: API_KEY, term: term}, (videos) => {
 		console.log(videos);
-		this.setState({videos: videos});
+		this.setState(
+			{
+			videos: videos,
+			selectedVideo: videos[0]
+			});
 		});
 	}
+
 	render() {
 			return (
 	     <div>
-	     	<SearchBar />
-	     	<VideoDetail video={this.state.videos[0]} />
-	     	<VideoList videos={this.state.videos} />
+	     	<SearchBar onSearchTermChange={term => this.videoSearch(term)} />
+	     	<VideoDetail video={this.state.selectedVideo} />
+	     	<VideoList 
+	     	onVideoSelect={selectedVideo => this.setState({selectedVideo})}
+	     	videos={this.state.videos} />
 	     </div> // It looks like HTML but behind-the-scenes this HTML is just JavaScript, Babel/webpack Translates this for the browser into HTML
 	    );
 	}
