@@ -1,4 +1,4 @@
-# Recreated_YouTube_with_React_And_API
+# YouTube_With_Working_Search_Bar_Using_React_And_API
 
 #I recreated YouTube using React with Bootstrap and the YouTube API.
 
